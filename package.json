@@ -12,6 +12,7 @@
   },
   "keywords": [
     "react",
+    "react-component",
     "keyboard",
     "shortcuts"
   ],
@@ -24,5 +25,8 @@
   "dependencies": {
     "key-event-to-string": "^1.1.0",
     "react": "^0.14.7"
+  },
+  "devDependencies": {
+    "react-tools": "^0.13.3"
   }
 }
