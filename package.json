@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/florian/react-shortcut-chooser/issues"
   },
-  "homepage": "https://github.com/florian/react-shortcut-chooser#readme"
+  "homepage": "https://github.com/florian/react-shortcut-chooser#readme",
+  "dependencies": {
+    "key-event-to-string": "^1.1.0",
+    "react": "^0.14.7"
+  }
 }
