@@ -1,6 +1,6 @@
 {
   "name": "react-shortcut-chooser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component that lets the user choose keyboard shortcuts",
   "main": "index.js",
   "scripts": {
