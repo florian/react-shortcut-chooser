@@ -4,8 +4,11 @@ This is a React component that lets the user choose a keyboard shortcut. Native 
 
 It's based on the [key-event-to-string](https://github.com/florian/key-event-to-string/) library that converts an event object into a readable format.
 
-
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
+## Demo
+
+I've added a minimalistic demo on [RequireBin](http://requirebin.com/?gist=0a89b084af7a1e614202). It sometimes takes RequireBin a while to load the NPM modules though.
 
 ## Installation
 
