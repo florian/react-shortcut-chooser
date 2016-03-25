@@ -30,8 +30,7 @@ ReactDOM.render(<ShortcutChooser onUpdate={callback} />, el)
 | `modifierNeeded` |  Are only shortcuts with modifiers valid? Modifiers are cmd, ctrl, alt and shift | `true` |
 | `keyNeeded` |  Is a key, other than a modifier, needed? | `true` |
 | `onUpdate` |  A callback that's called with the new value and the old value | None, it's required |
-| `validate` | Can be used to validate a potential keyboard shortcut. Is only
-called if `modifierNeeded` and `keyNeeded` were satisfied | A function that always returns `true`
+| `validate` | Can be used to validate a potential keyboard shortcut. Is only called if `modifierNeeded` and `keyNeeded` were satisfied | A function that always returns `true` |
 | `onInvalid` |  Depending on `modifierNeeded` / `keyNeeded` / `validate` some keyboard shortcuts will be rejected. This callback will be called with the invalid keyboard shortcut if that happens. Could e.g. be used to display an error message | Empty function |
 | `modifierChars` | Can be used to change the format according to the [key-event-to-string](https://github.com/florian/key-event-to-string#options) options. Could e.g. be used to get a Mac style | `{}`
 
