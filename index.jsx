@@ -11,7 +11,8 @@ module.exports = React.createClass({
       onInvalid: function () {},
       modifierNeeded: true,
       keyNeeded: true,
-      modifierChars: {}
+      modifierChars: {},
+      validate: function (value) { return true }
     }
   },
 
@@ -20,7 +21,8 @@ module.exports = React.createClass({
     onInvalid: React.PropTypes.func,
     modifierNeeded: React.PropTypes.bool,
     keyNeeded: React.PropTypes.bool,
-    modifierChars: React.PropTypes.object
+    modifierChars: React.PropTypes.object,
+    validate: React.ProcTypes.func
   },
 
   getInitialState: function () {
@@ -43,8 +45,8 @@ module.exports = React.createClass({
 
     var isValid = (!this.props.keyNeeded || details.hasKey) && (!this.props.modifierNeeded || details.hasModifier)
 
-    if (isValid) {
-      this.setState({ value: newValue  })
+    if (isValid && this.props.validate(newValue)) {
+      this.setState({ value: newValue })
       if (newValue !== oldValue) this.props.onUpdate(newValue, oldValue)
     } else {
       this.props.onInvalid(newValue)
