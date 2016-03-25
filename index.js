@@ -24,7 +24,7 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    return React.createElement("input", React.__spread({type: "text"},  this.props, {onKeyDown: this.keyDown, onFocus: this.select}))
+    return React.createElement("input", React.__spread({type: "text"},  this.props, {onKeyDown: this.keyDown, onFocus: this.select, onChange: this.noop}))
   },
 
   keyDown: function (e) {
@@ -52,5 +52,7 @@ module.exports = React.createClass({
 
   select: function (e) {
     e.target.select()
-  }
+  },
+
+  noop: function () {}
 })
