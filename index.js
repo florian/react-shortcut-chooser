@@ -24,7 +24,7 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    return React.createElement("input", React.__spread({type: "text"},  this.props, {onKeyDown: this.keyDown, onFocus: this.select, onChange: this.noop}))
+    return React.createElement("input", React.__spread({type: "text"},  this.props, {onKeyDown: this.keyDown, onFocus: this.select, onChange: false}))
   },
 
   keyDown: function (e) {
