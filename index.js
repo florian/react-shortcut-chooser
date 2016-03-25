@@ -30,7 +30,7 @@ module.exports = React.createClass({
   render: function () {
     var value = this.state.value || this.props.defaultValue || ''
 
-    return React.createElement("input", React.__spread({type: "text"},  this.props, {value: value, onKeyDown: this.keyDown, onFocus: this.select}))
+    return React.createElement("input", React.__spread({type: "text"},  this.props, {value: value, onKeyDown: this.keyDown, onFocus: this.select, onChange: this.noop}))
   },
 
   keyDown: function (e) {
@@ -44,7 +44,7 @@ module.exports = React.createClass({
     var isValid = (!this.props.keyNeeded || details.hasKey) && (!this.props.modifierNeeded || details.hasModifier)
 
     if (isValid) {
-      this.state.value = newValue
+      this.setState({ value: newValue  })
       if (newValue !== oldValue) this.props.onUpdate(newValue, oldValue)
     } else {
       this.props.onInvalid(newValue)
