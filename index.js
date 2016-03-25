@@ -7,7 +7,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function () {
     return {
-      onChange: function () {},
+      onUpdate: function () {},
       onInvalid: function () {},
       modifierNeeded: true,
       keyNeeded: true,
@@ -16,7 +16,7 @@ module.exports = React.createClass({
   },
 
   propTypes: {
-    onChange: React.PropTypes.func.isRequired,
+    onUpdate: React.PropTypes.func.isRequired,
     onInvalid: React.PropTypes.func,
     modifierNeeded: React.PropTypes.bool,
     keyNeeded: React.PropTypes.bool,
@@ -24,7 +24,7 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    return React.createElement("input", React.__spread({type: "text"},  this.props, {onKeyDown: this.keyDown, onFocus: this.select, onChange: false}))
+    return React.createElement("input", React.__spread({type: "text"},  this.props, {onKeyDown: this.keyDown, onFocus: this.select}))
   },
 
   keyDown: function (e) {
@@ -39,7 +39,7 @@ module.exports = React.createClass({
 
     if (isValid) {
       e.target.value = newValue
-      if (newValue !== oldValue) this.props.onChange(newValue, oldValue)
+      if (newValue !== oldValue) this.props.onUpdate(newValue, oldValue)
     } else {
       this.props.onInvalid(newValue)
     }
