@@ -22,7 +22,7 @@ module.exports = React.createClass({
     modifierNeeded: React.PropTypes.bool,
     keyNeeded: React.PropTypes.bool,
     modifierChars: React.PropTypes.object,
-    validate: React.ProcTypes.func
+    validate: React.PropTypes.func
   },
 
   getInitialState: function () {
