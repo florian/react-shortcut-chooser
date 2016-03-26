@@ -1,6 +1,6 @@
 {
   "name": "react-shortcut-chooser",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A React component that lets the user choose keyboard shortcuts",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/florian/react-shortcut-chooser#readme",
   "dependencies": {
-    "key-event-to-string": "^1.1.0"
+    "key-event-to-string": "^1.1.1"
   },
   "peerDependencies": {
     "react": "^0.14.7"
