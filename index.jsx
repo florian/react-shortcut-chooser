@@ -1,66 +1,85 @@
-var React = require('react')
+import React, { PropTypes } from 'react';
+import eventStringifier from 'key-event-to-string';
 
-var EventStringifier = require('key-event-to-string')
+export default class ShortcutPicker extends React.Component {
 
-module.exports = React.createClass({
-  displayName: 'ShortcutChooser',
+  static propTypes = {
+    onUpdate: PropTypes.func.isRequired,
+    onInvalid: PropTypes.func,
+    onChange: PropTypes.func,
+    modifierNeeded: PropTypes.bool,
+    keyNeeded: PropTypes.bool,
+    modifierChars: PropTypes.object,
+    validate: PropTypes.func,
+    className: PropTypes.any,
+    isDisabled: PropTypes.bool,
+    selectInputOnClick: PropTypes.bool,
+    defaultValue: PropTypes.string,
+  };
 
-  getDefaultProps: function () {
-    return {
-      onUpdate: function () {},
-      onInvalid: function () {},
-      modifierNeeded: true,
-      keyNeeded: true,
-      modifierChars: {},
-      validate: function (value) { return true }
-    }
-  },
+  static defaultProps = {
+    onUpdate: () => {},
+    onInvalid: () => {},
+    onChange: () => {},
+    modifierNeeded: true,
+    keyNeeded: true,
+    modifierChars: {},
+    selectInputOnClick: true,
+    validate: () => (true),
+    defaultValue: ''
+  };
 
-  propTypes: {
-    onUpdate: React.PropTypes.func.isRequired,
-    onInvalid: React.PropTypes.func,
-    modifierNeeded: React.PropTypes.bool,
-    keyNeeded: React.PropTypes.bool,
-    modifierChars: React.PropTypes.object,
-    validate: React.PropTypes.func
-  },
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: this.props.defaultValue
+    };
+  }
 
-  getInitialState: function () {
-    return { value: '' }
-  },
+  select(e) {
+    e.target.select();
+  }
 
-  render: function () {
-    var value = this.state.value || this.props.defaultValue || ''
+  keyDown(e) {
+    const { keyNeeded, modifierNeeded, modifierChars, validate } = this.props;
 
-    return <input type='text' {...this.props} value={value} onKeyDown={this.keyDown} onFocus={this.select} onChange={this.noop} />
-  },
+    e.preventDefault();
+    e.stopPropagation();
 
-  keyDown: function (e) {
-    var event2string = EventStringifier(this.props.modifierChars)
-    var eventDetails = EventStringifier.details
+    const event2string = eventStringifier(modifierChars);
+    const eventDetails = eventStringifier.details;
 
-    var oldValue = e.target.value
-    var newValue = event2string(e)
-    var details = eventDetails(e)
+    const oldValue = e.target.value;
+    const newValue = event2string(e);
 
-    var isValid = (!this.props.keyNeeded || details.hasKey) && (!this.props.modifierNeeded || details.hasModifier)
+    const details = eventDetails(e);
 
-    if (isValid && this.props.validate(newValue)) {
-      this.setState({ value: newValue })
-      if (newValue !== oldValue) this.props.onUpdate(newValue, oldValue)
+    const isValid =
+      (!keyNeeded || details.hasKey) &&
+      (!modifierNeeded || details.hasModifier);
+
+    if (isValid && validate(newValue)) {
+      this.setState({ value: newValue });
+      if (newValue !== oldValue) {
+        this.props.onUpdate(newValue, oldValue);
+      }
     } else {
-      this.props.onInvalid(newValue)
+      this.props.onInvalid(newValue);
     }
+  }
 
-    this.select(e)
-
-    e.preventDefault()
-    e.stopPropagation()
-  },
-
-  select: function (e) {
-    e.target.select()
-  },
-
-  noop: function () {}
-})
+  render() {
+    const { value } = this.state;
+    const { className, defaultValue, onChange, selectInputOnClick } = this.props;
+    return (
+      <input
+        className={className}
+        type="text"
+        value={defaultValue || value}
+        onChange={onChange}
+        onKeyDown={(e) => { this.keyDown(e); }}
+        onFocus={selectInputOnClick ? this.select : ''}
+      />
+    );
+  }
+}
